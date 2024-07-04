@@ -14,60 +14,100 @@
       />
     </head>
     <style>
-        .bodyOfCards{
-            background-color: rgb(228, 240, 241);
-        }
+      body {
+        overflow-x: hidden;
+      }
+      .bodyOfCards {
+        background-color: rgb(228, 240, 241);
+      }
       .titlePage {
         text-align: center;
         font-weight: bold;
         text-decoration: underline;
         max-width: 100%;
-       font-size: 60px;
+        font-size: 60px;
         padding-bottom: 10px;
-        background-image: linear-gradient(to right, rgb(115, 161, 211), whitesmoke);
+        border-bottom: 2px solid rgb(148, 196, 235);
+        background-image: linear-gradient(
+          to right,
+          rgb(115, 161, 211),
+          whitesmoke
+        );
       }
       .titlePage:before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-image: url(
-https://media.geeksforgeeks.org/wp-content/uploads/20200828184719/rain-300x300.png);
-                animation: rain 0.4s linear infinite;
-                opacity: 0;
-            }
-            @keyframes rain {
-                0% {
-                    background-position: 0 0;
-                    opacity: 1;
-                }
- 
-                100% {
-                    background-position: 8% 80%;
-                    opacity: 1;
-                }
-            }
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 13%;
+        background-image: url(https://media.geeksforgeeks.org/wp-content/uploads/20200828184719/rain-300x300.png);
+        animation: rain 0.8s linear infinite;
+        opacity: 0;
+      }
+      @keyframes rain {
+        0% {
+          background-position: 0 0;
+          opacity: 1;
+        }
+
+        100% {
+          background-position: 8% 80%;
+          opacity: 1;
+        }
+      }
+      .containerNextDays {
+        background-color: rgb(228, 240, 241);
+      }
+      .form-control {
+        max-width: 400px;
+        cursor: pointer;
+        text-align: center;
+      }
+      form {
+        background-color: rgb(228, 240, 241);
+        padding-top: 20px;
+        display: flex;
+        justify-content: center;
+      }
     </style>
 
     <body>
-      <div class="titlePage"><img id='lightning' src="/styles/lightning.webp "width="100px" height="100%" style="padding: top 0; margin-right: 50px;">    Weather App
-        <img src="/styles/cloud.webp" width="50px" height="50px" alt="clouds" style="margin-left: 50px;">
+      <div class="titlePage">
+        <img
+          id="lightning"
+          src="/styles/lightning.webp "
+          width="100px"
+          height="100%"
+          style="padding: top 0; margin-right: 50px"
+        />
+        Weather App
+        <img
+          src="/styles/cloud.webp"
+          width="50px"
+          height="50px"
+          alt="clouds"
+          style="margin-left: 50px"
+        />
       </div>
       <!--Body of Index page with weather cards-->
       <!--Today card-->
+
+      <form>
+        <input type="text" class="form-control" placeholder="Input city" />
+      </form>
+
       <div class="row d-flex justify-content-center py-5 bodyOfCards">
         <div class="col-md-8 col-lg-6 col-xl-5">
           <div class="card text-body" style="border-radius: 35px">
             <div class="card-body p-4">
               <div class="d-flex">
-                <h6 class="flex-grow-1">Warsaw</h6>
+                <h6 class="flex-grow-1">City</h6>
                 <h6>15:07</h6>
               </div>
 
               <div class="d-flex flex-column text-center mt-5 mb-4">
-                <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
+                <h6 class="display-4 mb-0 font-weight-bold temperature">T°C</h6>
                 <span class="small" style="color: #868b94">Stormy</span>
               </div>
 
@@ -96,170 +136,174 @@ https://media.geeksforgeeks.org/wp-content/uploads/20200828184719/rain-300x300.p
             </div>
           </div>
         </div>
-        <!--Second card-->
-        <div class="row d-flex justify-content-center py-5 bodyOfCards">
-            <div class="col-md-8 col-lg-6 col-xl-5">
-              <div class="card text-body" style="border-radius: 35px">
-                <div class="card-body p-4">
-                  <div class="d-flex">
-                    <h6 class="flex-grow-1">Warsaw</h6>
-                    <h6>15:07</h6>
-                  </div>
-    
-                  <div class="d-flex flex-column text-center mt-5 mb-4">
-                    <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
-                    <span class="small" style="color: #868b94">Stormy</span>
-                  </div>
-    
-                  <div class="d-flex align-items-center">
-                    <div class="flex-grow-1" style="font-size: 1rem">
-                      <div>
-                        <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                        <span class="ms-1"> 40 km/h </span>
-                      </div>
-                      <div>
-                        <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                        <span class="ms-1"> 84% </span>
-                      </div>
-                      <div>
-                        <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                        <span class="ms-1"> 0.2h </span>
-                      </div>
+      </div>
+      <!--Second card-->
+      <div class="containerNextDays">
+        <div class="row d-flex justify-content-center py-5">
+          <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="card text-body" style="border-radius: 35px">
+              <div class="card-body p-4">
+                <div class="d-flex">
+                  <h6 class="flex-grow-1">Warsaw</h6>
+                  <h6>15:07</h6>
+                </div>
+
+                <div class="d-flex flex-column text-center mt-5 mb-4">
+                  <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
+                  <span class="small" style="color: #868b94">Stormy</span>
+                </div>
+
+                <div class="d-flex align-items-center">
+                  <div class="flex-grow-1" style="font-size: 1rem">
+                    <div>
+                      <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 40 km/h </span>
                     </div>
                     <div>
-                      <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                        width="100px"
-                      />
+                      <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 84% </span>
+                    </div>
+                    <div>
+                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 0.2h </span>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-      </div>
-      <!--Third card-->
-      <div class="row d-flex justify-content-center py-5 bodyOfCards">
-        <div class="col-md-8 col-lg-6 col-xl-5">
-          <div class="card text-body" style="border-radius: 35px">
-            <div class="card-body p-4">
-              <div class="d-flex">
-                <h6 class="flex-grow-1">Warsaw</h6>
-                <h6>15:07</h6>
-              </div>
-
-              <div class="d-flex flex-column text-center mt-5 mb-4">
-                <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
-                <span class="small" style="color: #868b94">Stormy</span>
-              </div>
-
-              <div class="d-flex align-items-center">
-                <div class="flex-grow-1" style="font-size: 1rem">
                   <div>
-                    <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                    <span class="ms-1"> 40 km/h </span>
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+                      width="100px"
+                    />
                   </div>
-                  <div>
-                    <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                    <span class="ms-1"> 84% </span>
-                  </div>
-                  <div>
-                    <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                    <span class="ms-1"> 0.2h </span>
-                  </div>
-                </div>
-                <div>
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                    width="100px"
-                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-  </div>
-  <!--Fourthcard-->
-  <div class="row d-flex justify-content-center py-5 bodyOfCards">
-    <div class="col-md-8 col-lg-6 col-xl-5">
-      <div class="card text-body" style="border-radius: 35px">
-        <div class="card-body p-4">
-          <div class="d-flex">
-            <h6 class="flex-grow-1">Warsaw</h6>
-            <h6>15:07</h6>
-          </div>
+        <!--Third card-->
+        <div class="row d-flex justify-content-center py-5">
+          <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="card text-body" style="border-radius: 35px">
+              <div class="card-body p-4">
+                <div class="d-flex">
+                  <h6 class="flex-grow-1">Warsaw</h6>
+                  <h6>15:07</h6>
+                </div>
 
-          <div class="d-flex flex-column text-center mt-5 mb-4">
-            <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
-            <span class="small" style="color: #868b94">Stormy</span>
-          </div>
+                <div class="d-flex flex-column text-center mt-5 mb-4">
+                  <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
+                  <span class="small" style="color: #868b94">Stormy</span>
+                </div>
 
-          <div class="d-flex align-items-center">
-            <div class="flex-grow-1" style="font-size: 1rem">
-              <div>
-                <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                <span class="ms-1"> 40 km/h </span>
-              </div>
-              <div>
-                <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                <span class="ms-1"> 84% </span>
-              </div>
-              <div>
-                <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                <span class="ms-1"> 0.2h </span>
+                <div class="d-flex align-items-center">
+                  <div class="flex-grow-1" style="font-size: 1rem">
+                    <div>
+                      <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 40 km/h </span>
+                    </div>
+                    <div>
+                      <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 84% </span>
+                    </div>
+                    <div>
+                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 0.2h </span>
+                    </div>
+                  </div>
+                  <div>
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+                      width="100px"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div>
-              <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                width="100px"
-              />
+          </div>
+        </div>
+        <!--Fourthcard-->
+        <div class="row d-flex justify-content-center py-5">
+          <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="card text-body" style="border-radius: 35px">
+              <div class="card-body p-4">
+                <div class="d-flex">
+                  <h6 class="flex-grow-1">Warsaw</h6>
+                  <h6>15:07</h6>
+                </div>
+
+                <div class="d-flex flex-column text-center mt-5 mb-4">
+                  <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
+                  <span class="small" style="color: #868b94">Stormy</span>
+                </div>
+
+                <div class="d-flex align-items-center">
+                  <div class="flex-grow-1" style="font-size: 1rem">
+                    <div>
+                      <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 40 km/h </span>
+                    </div>
+                    <div>
+                      <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 84% </span>
+                    </div>
+                    <div>
+                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 0.2h </span>
+                    </div>
+                  </div>
+                  <div>
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+                      width="100px"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Fifth card-->
+        <div class="row d-flex justify-content-center py-5">
+          <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="card text-body" style="border-radius: 35px">
+              <div class="card-body p-4">
+                <div class="d-flex">
+                  <h6 class="flex-grow-1">Warsaw</h6>
+                  <h6>15:07</h6>
+                </div>
+
+                <div class="d-flex flex-column text-center mt-5 mb-4">
+                  <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
+                  <span class="small" style="color: #868b94">Stormy</span>
+                </div>
+
+                <div class="d-flex align-items-center">
+                  <div class="flex-grow-1" style="font-size: 1rem">
+                    <div>
+                      <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 40 km/h </span>
+                    </div>
+                    <div>
+                      <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 84% </span>
+                    </div>
+                    <div>
+                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> 0.2h </span>
+                    </div>
+                  </div>
+                  <div>
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+                      width="100px"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-</div>
-<!--Fifth card-->
-<div class="row d-flex justify-content-center py-5 bodyOfCards">
-    <div class="col-md-8 col-lg-6 col-xl-5">
-      <div class="card text-body" style="border-radius: 35px">
-        <div class="card-body p-4">
-          <div class="d-flex">
-            <h6 class="flex-grow-1">Warsaw</h6>
-            <h6>15:07</h6>
-          </div>
 
-          <div class="d-flex flex-column text-center mt-5 mb-4">
-            <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
-            <span class="small" style="color: #868b94">Stormy</span>
-          </div>
-
-          <div class="d-flex align-items-center">
-            <div class="flex-grow-1" style="font-size: 1rem">
-              <div>
-                <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                <span class="ms-1"> 40 km/h </span>
-              </div>
-              <div>
-                <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                <span class="ms-1"> 84% </span>
-              </div>
-              <div>
-                <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                <span class="ms-1"> 0.2h </span>
-              </div>
-            </div>
-            <div>
-              <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                width="100px"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
       <script src="scripts.js"></script>
     </body>
   </html>
