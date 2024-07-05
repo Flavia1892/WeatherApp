@@ -59,6 +59,13 @@
       .containerNextDays {
         background-color: rgb(228, 240, 241);
       }
+      #loading {
+        background-color: rgb(228, 240, 241);
+        padding-top: 200px;
+        padding-bottom: 200px;
+        display: flex;
+        justify-content: center;
+      }
       .form-control {
         max-width: 400px;
         cursor: pointer;
@@ -69,6 +76,39 @@
         padding-top: 20px;
         display: flex;
         justify-content: center;
+      }
+      .btn-outline-dark {
+        margin-top: 90px;
+        border: 0px;
+      }
+      .reset {
+        width: 200px;
+        margin-left: 850px;
+      }
+      .reset:hover {
+        background-color: black;
+        color: white;
+      }
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 1350px;
+        top: 30px;
+        width: 25%; /* Full width */
+        height: 30%; /* Full height */
+        overflow: hidden; /* Enable scroll if needed */
+        background-color: rgb(15, 14, 14); /* Fallback color */
+        background-color: rgba(6, 6, 6, 0.526); /* Black w/ opacity */
+      }
+
+      /* Modal Content/Box */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%; /* Could be more or less, depending on screen size */
       }
     </style>
 
@@ -90,66 +130,36 @@
           style="margin-left: 50px"
         />
       </div>
-      <!--Body of Index page with weather cards-->
-      <!--Today card-->
 
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <p>
+            Please input your city.<br />
+            Be mindful of the country and zip code
+          </p>
+        </div>
+      </div>
       <form>
         <input type="text" class="form-control" placeholder="Input city" />
       </form>
-
-      <div class="row d-flex justify-content-center py-5 bodyOfCards">
-        <div class="col-md-8 col-lg-6 col-xl-5">
-          <div class="card text-body" style="border-radius: 35px">
-            <div class="card-body p-4">
-              <div class="d-flex">
-                <h6 class="flex-grow-1">City</h6>
-                <h6>15:07</h6>
-              </div>
-
-              <div class="d-flex flex-column text-center mt-5 mb-4">
-                <h6 class="display-4 mb-0 font-weight-bold temperature">T°C</h6>
-                <span class="small" style="color: #868b94">Stormy</span>
-              </div>
-
-              <div class="d-flex align-items-center">
-                <div class="flex-grow-1" style="font-size: 1rem">
-                  <div>
-                    <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                    <span class="ms-1"> 40 km/h </span>
-                  </div>
-                  <div>
-                    <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                    <span class="ms-1"> 84% </span>
-                  </div>
-                  <div>
-                    <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                    <span class="ms-1"> 0.2h </span>
-                  </div>
-                </div>
-                <div>
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                    width="100px"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--Second card-->
-      <div class="containerNextDays">
-        <div class="row d-flex justify-content-center py-5">
+      <p id="loading"></p>
+      <!--Body of Index page with weather cards-->
+      <!--Today card-->
+      <div class="pageContent">
+        <div class="row d-flex justify-content-center py-5 bodyOfCards">
           <div class="col-md-8 col-lg-6 col-xl-5">
             <div class="card text-body" style="border-radius: 35px">
               <div class="card-body p-4">
                 <div class="d-flex">
-                  <h6 class="flex-grow-1">Warsaw</h6>
+                  <h6 class="flex-grow-1">City</h6>
                   <h6>15:07</h6>
                 </div>
 
                 <div class="d-flex flex-column text-center mt-5 mb-4">
-                  <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
+                  <h6 class="display-4 mb-0 font-weight-bold temperature">
+                    T°C
+                  </h6>
                   <span class="small" style="color: #868b94">Stormy</span>
                 </div>
 
@@ -178,132 +188,37 @@
               </div>
             </div>
           </div>
+
+          <button type="button" class="btn btn-outline-dark">
+            Show weather forecast for the next 5 days
+          </button>
         </div>
-        <!--Third card-->
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-8 col-lg-6 col-xl-5">
-            <div class="card text-body" style="border-radius: 35px">
-              <div class="card-body p-4">
-                <div class="d-flex">
-                  <h6 class="flex-grow-1">Warsaw</h6>
-                  <h6>15:07</h6>
-                </div>
-
-                <div class="d-flex flex-column text-center mt-5 mb-4">
-                  <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
-                  <span class="small" style="color: #868b94">Stormy</span>
-                </div>
-
-                <div class="d-flex align-items-center">
-                  <div class="flex-grow-1" style="font-size: 1rem">
-                    <div>
-                      <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 40 km/h </span>
-                    </div>
-                    <div>
-                      <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 84% </span>
-                    </div>
-                    <div>
-                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 0.2h </span>
-                    </div>
-                  </div>
-                  <div>
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                      width="100px"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--Fourthcard-->
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-8 col-lg-6 col-xl-5">
-            <div class="card text-body" style="border-radius: 35px">
-              <div class="card-body p-4">
-                <div class="d-flex">
-                  <h6 class="flex-grow-1">Warsaw</h6>
-                  <h6>15:07</h6>
-                </div>
-
-                <div class="d-flex flex-column text-center mt-5 mb-4">
-                  <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
-                  <span class="small" style="color: #868b94">Stormy</span>
-                </div>
-
-                <div class="d-flex align-items-center">
-                  <div class="flex-grow-1" style="font-size: 1rem">
-                    <div>
-                      <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 40 km/h </span>
-                    </div>
-                    <div>
-                      <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 84% </span>
-                    </div>
-                    <div>
-                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 0.2h </span>
-                    </div>
-                  </div>
-                  <div>
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                      width="100px"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--Fifth card-->
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-8 col-lg-6 col-xl-5">
-            <div class="card text-body" style="border-radius: 35px">
-              <div class="card-body p-4">
-                <div class="d-flex">
-                  <h6 class="flex-grow-1">Warsaw</h6>
-                  <h6>15:07</h6>
-                </div>
-
-                <div class="d-flex flex-column text-center mt-5 mb-4">
-                  <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
-                  <span class="small" style="color: #868b94">Stormy</span>
-                </div>
-
-                <div class="d-flex align-items-center">
-                  <div class="flex-grow-1" style="font-size: 1rem">
-                    <div>
-                      <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 40 km/h </span>
-                    </div>
-                    <div>
-                      <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 84% </span>
-                    </div>
-                    <div>
-                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 0.2h </span>
-                    </div>
-                  </div>
-                  <div>
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                      width="100px"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!--rest of cards-->
+        <div class="containerNextDays"></div>
+        <div
+          style="
+            background-color: rgb(228, 240, 241);
+            padding-top: 50px;
+            padding-bottom: 50px;
+          "
+        >
+          <button type="button" class="reset">Reset</button>
         </div>
       </div>
 
+      <footer class="bg-body-tertiary text-center text-lg-start">
+        <!-- Copyright -->
+        <div
+          class="text-center p-3"
+          style="background-color: rgba(10, 32, 103, 0.291)"
+        >
+          © 2024 Copyright:
+          <a class="text-body" href="https://mdbootstrap.com/"
+            >Cat momma's site Powered by MDBootstrap</a
+          >
+        </div>
+        <!-- Copyright -->
+      </footer>
       <script src="scripts.js"></script>
     </body>
   </html>
