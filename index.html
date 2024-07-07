@@ -110,6 +110,14 @@
         border: 1px solid #888;
         width: 40%; /* Could be more or less, depending on screen size */
       }
+      .banner {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        height: 90px;
+        background-image: url(/styles/banner.jpg);
+        background-repeat: repeat-x;
+      }
     </style>
 
     <body>
@@ -135,13 +143,14 @@
         <!-- Modal content -->
         <div class="modal-content">
           <p>
-            Please input your city.<br />
-            Be mindful of the country and zip code
+            City starts with capital letter.<br />
+            Country short and lower cases(e.g uk, ro, it)
           </p>
         </div>
       </div>
+      <div class="banner"></div>
       <form>
-        <input type="text" class="form-control" placeholder="Input city" />
+        <input type="text" class="form-control" placeholder="City,country" />
       </form>
       <p id="loading"></p>
       <!--Body of Index page with weather cards-->
@@ -152,30 +161,32 @@
             <div class="card text-body" style="border-radius: 35px">
               <div class="card-body p-4">
                 <div class="d-flex">
-                  <h6 class="flex-grow-1">City</h6>
-                  <h6>15:07</h6>
+                  <h6 class="flex-grow-1 cityToday">City</h6>
+                  <h6 class="flex-grow-1">Today</h6>
+                  <h6 id="todayTime">Time and date</h6>
                 </div>
 
                 <div class="d-flex flex-column text-center mt-5 mb-4">
-                  <h6 class="display-4 mb-0 font-weight-bold temperature">
-                    T°C
-                  </h6>
-                  <span class="small" style="color: #868b94">Stormy</span>
+                  <h6
+                    class="display-4 mb-0 font-weight-bold temperature"
+                    id="temperatureToday"
+                  ></h6>
+                  <span class="small" style="color: #868b94"></span>
                 </div>
 
                 <div class="d-flex align-items-center">
                   <div class="flex-grow-1" style="font-size: 1rem">
                     <div>
                       <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 40 km/h </span>
+                      <span class="ms-1" id="windToday"> </span>
                     </div>
                     <div>
                       <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 84% </span>
+                      <span class="ms-1" id="humidityToday"> </span>
                     </div>
                     <div>
                       <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 0.2h </span>
+                      <span class="ms-1" id="pressureToday"> </span>
                     </div>
                   </div>
                   <div>
@@ -190,7 +201,7 @@
           </div>
 
           <button type="button" class="btn btn-outline-dark">
-            Show weather forecast for the next 5 days
+            Below the weather forecast for the next 5 days
           </button>
         </div>
         <!--rest of cards-->

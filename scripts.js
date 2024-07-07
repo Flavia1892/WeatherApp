@@ -12,98 +12,174 @@ responseScreen(widthOfScreen);
 widthOfScreen.addEventListener("change", function () {
   responseScreen(widthOfScreen);
 });
+function fetchData(city, country) {
+  fetch("mySecret.txt")
+    .then((res) => res.json())
+    .then((textJSON) => {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&appid=` +
+          textJSON.API_KEY
+      )
+        .then((response) => response.json()) // get Response, and make it a JSON object
+        .then((responseJSON) => {
+          console.log(responseJSON);
+          //Here we set the details of the today card according to the user input
+          document.querySelector(".cityToday").innerHTML =
+            city + " " + responseJSON.sys.country;
+          //let todayWeather = responseJSON.list[0];
+          document.getElementById("todayTime").innerHTML = `${getTimeConverter(
+            responseJSON.dt
+          )}`;
 
-function showWheatherForNextDays() {
-  document.querySelector(".containerNextDays").innerHTML = `
-  <div class="d-flex justify-content-center">
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>`;
+          //here we set the weather for the today card according to the user input
 
-  setTimeout(() => {
-    let html = "";
-    for (let i = 0; i < 5; i++) {
-      html += ` <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-8 col-lg-6 col-xl-5">
-            <div class="card text-body" style="border-radius: 35px">
-              <div class="card-body p-4">
-                <div class="d-flex">
-                  <h6 class="flex-grow-1">Warsaw</h6>
-                  <h6>15:07</h6>
-                </div>
+          document.querySelector("#temperatureToday").innerHTML =
+            responseJSON.main.temp + " °C";
+          document.querySelector(".small").innerHTML =
+            responseJSON.weather[0].main;
+          document.getElementById("windToday").innerHTML =
+            "Wind:" + " " + `<b>${responseJSON.wind.speed}` + "m/sec";
+          document.getElementById("humidityToday").innerHTML =
+            "Humidity:" + " " + `<b> ${responseJSON.main.humidity}` + "%";
+          document.getElementById("pressureToday").innerHTML =
+            "Pressure:" + " " + `<b>${responseJSON.main.pressure}`;
+        });
 
-                <div class="d-flex flex-column text-center mt-5 mb-4">
-                  <h6 class="display-4 mb-0 font-weight-bold">13°C</h6>
-                  <span class="small" style="color: #868b94">Stormy</span>
-                </div>
+      //here we use the same API-KEY stored in textJSON to fetch data from forecast API
+      fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&appid=` +
+          textJSON.API_KEY
+      )
+        .then((response) => response.json()) // get Response, and make it a JSON object
+        .then((responseJSON) => {
+          //let weather = responseJSON.list[7];
+          console.log(responseJSON);
 
-                <div class="d-flex align-items-center">
-                  <div class="flex-grow-1" style="font-size: 1rem">
-                    <div>
-                      <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 40 km/h </span>
-                    </div>
-                    <div>
-                      <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 84% </span>
-                    </div>
-                    <div>
-                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                      <span class="ms-1"> 0.2h </span>
-                    </div>
-                  </div>
-                  <div>
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                      width="100px"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+          document.querySelector(".containerNextDays").innerHTML = `
+          <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
           </div>
-        </div>
-            `;
+        </div>`;
 
-      document.querySelector(".containerNextDays").innerHTML = html;
-      document.querySelector(".reset").style.display = "block";
-    }
-  }, 2000);
+          setTimeout(() => {
+            let counter = 7;
+            let html = "";
+            for (let i = 1; i < 6; i++) {
+              html += ` <div class="row d-flex justify-content-center py-5">
+                  <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card text-body" style="border-radius: 35px">
+                      <div class="card-body p-4">
+                        <div class="d-flex">
+                          <h6 class="flex-grow-1" id='cityCountry'>${city} ${responseJSON.city.country}</h6>
+                          <h6 class="flex-grow-1">Day ${i} </h6>
+                          <h6 id='time'>${responseJSON.list[counter].dt_txt} </h6>
+                        </div>
+        
+                        <div class="d-flex flex-column text-center mt-5 mb-4">
+                          <h6 class="display-4 mb-0 font-weight-bold">${responseJSON.list[counter].main.temp} °C</h6>
+                          <span class="small" style="color: #868b94">${responseJSON.list[counter].weather[0].main}</span>
+                        </div>
+        
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1" style="font-size: 1rem">
+                            <div>
+                              <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
+                              <span class="ms-1" id='windspeed'>Wind: <b> ${responseJSON.list[counter].wind.speed} m/sec</b></span>
+                            </div>
+                            <div>
+                              <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
+                              <span class="ms-1">Humidity: <b>${responseJSON.list[counter].main.humidity} %</b></span>
+                            </div>
+                            <div>
+                              <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
+                              <span class="ms-1">Pressure: <b>${responseJSON.list[counter].main.pressure} </b></span>
+                            </div>
+                          </div>
+                          <div>
+                            <img
+                              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+                              width="100px"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                    `;
+
+              document.querySelector(".containerNextDays").innerHTML = html;
+              document.querySelector(".reset").style.display = "block";
+              counter += 8;
+            }
+          }, 2000);
+        });
+    });
 }
-//Modal display
-let modal = document.getElementById("myModal");
 
-let btn = document.querySelector("form");
+function getTimeConverter(epochDate) {
+  let date = new Date(epochDate * 1000);
+  return date.toLocaleString();
+}
 
-let span = document.getElementsByClassName("close")[0];
+function getValueByEnter() {
+  let value = "";
 
-btn.addEventListener("mouseover", function () {
-  modal.style.display = "block";
-});
+  document
+    .querySelector(".form-control")
+    .addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        value = this.value;
+        console.log(value);
+        let arrOfWords = value.split(",");
+        console.log(arrOfWords);
 
-btn.addEventListener("mouseout", function () {
-  modal.style.display = "none";
-});
-//End of Modal
-
+        fetchData(arrOfWords[0], arrOfWords[1]);
+        this.value = "";
+      }
+    });
+}
 
 //Stuff that runs automatically upon loading the page
-document
-  .querySelector(".btn-outline-dark")
-  .addEventListener("click", showWheatherForNextDays);
-
 document.querySelector(".reset").addEventListener("click", () => {
   document.querySelector(".containerNextDays").innerHTML = "";
   document.querySelector(".reset").style.display = "none";
+  document.querySelector(".cityToday").innerHTML = "City";
+  document.getElementById("todayTime").innerHTML = "Time and date";
+  document.querySelector("#temperatureToday").innerHTML = "";
+  document.querySelector("#windToday").innerHTML = "";
+  document.querySelector("#humidityToday").innerHTML = "";
+  document.querySelector("#pressureToday").innerHTML = "";
+  document.querySelector(".small").innerHTML = "";
 });
 
 document.querySelector(".reset").style.display = "none";
 document.querySelector(".pageContent").style.display = "none";
+document.querySelector(".form-control").style.display = "none";
 document.querySelector("#loading").innerHTML = `
 <img src='/styles/load.webp' width='250px' height='250px'>Loading....
   `;
 setTimeout(() => {
+  document.querySelector(".form-control").style.display = "block";
   document.querySelector(".pageContent").style.display = "block";
   document.querySelector("#loading").style.display = "none";
+  //Modal display
+  let modal = document.getElementById("myModal");
+
+  let btn = document.querySelector("form");
+
+  let span = document.getElementsByClassName("close")[0];
+
+  btn.addEventListener("mouseover", function () {
+    modal.style.display = "block";
+  });
+
+  btn.addEventListener("mouseout", function () {
+    modal.style.display = "none";
+  });
+  //End of Modal
 }, 3000);
+
+getValueByEnter();
