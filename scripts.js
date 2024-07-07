@@ -43,6 +43,10 @@ function fetchData(city, country) {
             "Humidity:" + " " + `<b> ${responseJSON.main.humidity}` + "%";
           document.getElementById("pressureToday").innerHTML =
             "Pressure:" + " " + `<b>${responseJSON.main.pressure}`;
+          document.querySelector("#picture").innerHTML = `<img
+                              src="/styles/${responseJSON.weather[0].main}.webp"
+                              width="130px" height="100px" style="border-radius:20px"
+                            />`;
         });
 
       //here we use the same API-KEY stored in textJSON to fetch data from forecast API
@@ -66,40 +70,56 @@ function fetchData(city, country) {
             let counter = 7;
             let html = "";
             for (let i = 1; i < 6; i++) {
-              html += ` <div class="row d-flex justify-content-center py-5">
+              html += ` <div class="row d-flex justify-content-center py-5" >
                   <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="card text-body" style="border-radius: 35px">
                       <div class="card-body p-4">
                         <div class="d-flex">
-                          <h6 class="flex-grow-1" id='cityCountry'>${city} ${responseJSON.city.country}</h6>
+                          <h6 class="flex-grow-1" id='cityCountry'>${city} ${
+                responseJSON.city.country
+              }</h6>
                           <h6 class="flex-grow-1">Day ${i} </h6>
-                          <h6 id='time'>${responseJSON.list[counter].dt_txt} </h6>
+                          <h6 id='time'>${getTimeConverter(
+                            responseJSON.list[counter].dt
+                          )} </h6>
                         </div>
         
                         <div class="d-flex flex-column text-center mt-5 mb-4">
-                          <h6 class="display-4 mb-0 font-weight-bold">${responseJSON.list[counter].main.temp} °C</h6>
-                          <span class="small" style="color: #868b94">${responseJSON.list[counter].weather[0].main}</span>
+                          <h6 class="display-4 mb-0 font-weight-bold">${
+                            responseJSON.list[counter].main.temp
+                          } °C</h6>
+                          <span class="small" style="color: #868b94">${
+                            responseJSON.list[counter].weather[0].main
+                          }</span>
                         </div>
         
                         <div class="d-flex align-items-center">
                           <div class="flex-grow-1" style="font-size: 1rem">
                             <div>
                               <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-                              <span class="ms-1" id='windspeed'>Wind: <b> ${responseJSON.list[counter].wind.speed} m/sec</b></span>
+                              <span class="ms-1" id='windspeed'>Wind: <b> ${
+                                responseJSON.list[counter].wind.speed
+                              } m/sec</b></span>
                             </div>
                             <div>
                               <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-                              <span class="ms-1">Humidity: <b>${responseJSON.list[counter].main.humidity} %</b></span>
+                              <span class="ms-1">Humidity: <b>${
+                                responseJSON.list[counter].main.humidity
+                              } %</b></span>
                             </div>
                             <div>
                               <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
-                              <span class="ms-1">Pressure: <b>${responseJSON.list[counter].main.pressure} </b></span>
+                              <span class="ms-1">Pressure: <b>${
+                                responseJSON.list[counter].main.pressure
+                              } </b></span>
                             </div>
                           </div>
                           <div>
                             <img
-                              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                              width="100px"
+                              src="/styles/${
+                                responseJSON.list[counter].weather[0].main
+                              }.webp"
+                              width="130px" height="100px" style="border-radius:20px"
                             />
                           </div>
                         </div>
@@ -153,6 +173,7 @@ document.querySelector(".reset").addEventListener("click", () => {
   document.querySelector("#humidityToday").innerHTML = "";
   document.querySelector("#pressureToday").innerHTML = "";
   document.querySelector(".small").innerHTML = "";
+  document.querySelector("#picture").innerHTML = "";
 });
 
 document.querySelector(".reset").style.display = "none";
