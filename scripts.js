@@ -6,9 +6,8 @@ function responseScreen(x) {
   if (x.matches) {
     document.querySelector(".titlePage").style = "font-size:25px";
     document.querySelector(".btn-outline-dark").style.display = "none";
-    document.querySelector('reset').style.display='block';
-    displaySavedData.style.fontSize='10px';
-   
+    document.querySelector(".reset").style.display = "block";
+    displaySavedData.style.fontSize = "10px";
   } else {
     document.querySelector(".titlePage").style = "font-size:60px";
     document.querySelector(".btn-outline-dark").style.display = "none";

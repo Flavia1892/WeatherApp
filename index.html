@@ -21,6 +21,10 @@
         background-color: rgb(228, 240, 241);
       }
       .titlePage {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
         text-align: center;
         font-weight: bold;
         text-decoration: underline;
@@ -122,6 +126,12 @@
         color: white;
         background-color: black;
       }
+
+      @media screen and (min-width: 451px) {
+        .titlePage {
+          font-size: 40px;
+        }
+      }
     </style>
 
     <body>
@@ -131,16 +141,10 @@
           src="/styles/lightning.webp "
           width="100px"
           height="100%"
-          style="padding: top 0; margin-right: 50px"
+          style="padding: top 0"
         />
         Weather App
-        <img
-          src="/styles/cloud.webp"
-          width="50px"
-          height="50px"
-          alt="clouds"
-          style="margin-left: 50px"
-        />
+        <img src="/styles/cloud.webp" width="50px" height="50px" alt="clouds" />
       </div>
 
       <div id="myModal" class="modal">
