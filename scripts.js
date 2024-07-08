@@ -180,12 +180,11 @@ function loadWeatherdata() {
   let savedDataFromUser = localStorage.getItem("weatherDataFromUser");
   if (savedDataFromUser) {
     {
-      displaySavedData.style.display = "block";
-      displaySavedData.innerHTML = `<h3>Your last city searched is <li>${savedDataFromUser}</li></h3>`;
+      displaySavedData.innerHTML = `<h3>Your last city searched is: <li>${savedDataFromUser} <button type='button' id='close'>X</button></li></h3>`;
+      document.getElementById("close").addEventListener("click", () => {
+        displaySavedData.innerHTML = "";
+      });
     }
-    setTimeout(() => {
-      displaySavedData.style.display = "none";
-    }, 3000);
   } else alert("No data stored to be found!");
 }
 
@@ -234,3 +233,5 @@ clearSavedDataButton.addEventListener("click", () => {
   localStorage.setItem("weatherDataFromUser", "");
   displaySavedData.innerHTML = "";
 });
+
+document.querySelector(".btn-outline-dark").style.display = "none";
