@@ -5,10 +5,13 @@ let displaySavedData = document.getElementById("displaySavedData");
 function responseScreen(x) {
   if (x.matches) {
     document.querySelector(".titlePage").style = "font-size:25px";
-    document.querySelector(".btn-outline-dark").style = "font-size:20px";
+    document.querySelector(".btn-outline-dark").style.display = "none";
+    document.querySelector('reset').style.display='block';
+    displaySavedData.style.fontSize='10px';
+   
   } else {
     document.querySelector(".titlePage").style = "font-size:60px";
-    document.querySelector(".btn-outline-dark").style = "font-size:40px";
+    document.querySelector(".btn-outline-dark").style.display = "none";
   }
 }
 let widthOfScreen = window.matchMedia("(max-width:550px");
@@ -53,6 +56,9 @@ function fetchData(city, country) {
                               src="/styles/${responseJSON.weather[0].main}.webp"
                               width="130px" height="100px" style="border-radius:20px"
                             />`;
+        })
+        .catch(() => {
+          alert("Error 404");
         });
 
       saveWeatherdata(city);
@@ -160,10 +166,7 @@ function getValueByEnter() {
       if (e.key === "Enter") {
         e.preventDefault();
         value = this.value;
-        console.log(value);
         let arrOfWords = value.split(",");
-        console.log(arrOfWords);
-
         fetchData(arrOfWords[0], arrOfWords[1]);
         this.value = "";
       }
@@ -228,7 +231,8 @@ setTimeout(() => {
 }, 3000);
 
 getValueByEnter();
-loadDataButton.addEventListener("click", loadWeatherdata);
+loadDataButton.addEventListener("click", loadWeatherdata); //here we fire up the load local storage data
+//here we clear the local storage data
 clearSavedDataButton.addEventListener("click", () => {
   localStorage.setItem("weatherDataFromUser", "");
   displaySavedData.innerHTML = "";

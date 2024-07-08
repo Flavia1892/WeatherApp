@@ -80,7 +80,6 @@
 
       .reset {
         width: 200px;
-        margin-left: 850px;
       }
       .reset:hover {
         background-color: black;
@@ -214,7 +213,13 @@
           </div>
           <div
             id="displaySavedData"
-            style="margin-left: 1500px; padding-top: 30px;padding-bottom:30px"
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              padding-top: 30px;
+              padding-bottom: 30px;
+            "
           ></div>
 
           <button type="button" class="btn btn-outline-dark">
@@ -230,7 +235,9 @@
             padding-bottom: 60px;
           "
         >
-          <button type="button" class="reset">Reset</button>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center">
+            <button type="button" class="reset">Reset</button>
+          </div>
         </div>
       </div>
 
