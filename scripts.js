@@ -1,3 +1,7 @@
+let clearSavedDataButton = document.getElementById("saveData");
+let loadDataButton = document.getElementById("loadData");
+let displaySavedData = document.getElementById("displaySavedData");
+
 function responseScreen(x) {
   if (x.matches) {
     document.querySelector(".titlePage").style = "font-size:25px";
@@ -12,6 +16,8 @@ responseScreen(widthOfScreen);
 widthOfScreen.addEventListener("change", function () {
   responseScreen(widthOfScreen);
 });
+
+//The actual functions for functionality
 function fetchData(city, country) {
   fetch("mySecret.txt")
     .then((res) => res.json())
@@ -48,6 +54,8 @@ function fetchData(city, country) {
                               width="130px" height="100px" style="border-radius:20px"
                             />`;
         });
+
+      saveWeatherdata(city);
 
       //here we use the same API-KEY stored in textJSON to fetch data from forecast API
       fetch(
@@ -162,6 +170,25 @@ function getValueByEnter() {
     });
 }
 
+function saveWeatherdata(dataFromUser) {
+  if (dataFromUser) {
+    localStorage.setItem("weatherDataFromUser", dataFromUser);
+  } else alert("No data to save");
+}
+
+function loadWeatherdata() {
+  let savedDataFromUser = localStorage.getItem("weatherDataFromUser");
+  if (savedDataFromUser) {
+    {
+      displaySavedData.style.display = "block";
+      displaySavedData.innerHTML = `<h3>Your last city searched is <li>${savedDataFromUser}</li></h3>`;
+    }
+    setTimeout(() => {
+      displaySavedData.style.display = "none";
+    }, 3000);
+  } else alert("No data stored to be found!");
+}
+
 //Stuff that runs automatically upon loading the page
 document.querySelector(".reset").addEventListener("click", () => {
   document.querySelector(".containerNextDays").innerHTML = "";
@@ -191,8 +218,6 @@ setTimeout(() => {
 
   let btn = document.querySelector("form");
 
-  let span = document.getElementsByClassName("close")[0];
-
   btn.addEventListener("mouseover", function () {
     modal.style.display = "block";
   });
@@ -204,3 +229,8 @@ setTimeout(() => {
 }, 3000);
 
 getValueByEnter();
+loadDataButton.addEventListener("click", loadWeatherdata);
+clearSavedDataButton.addEventListener("click", () => {
+  localStorage.setItem("weatherDataFromUser", "");
+  displaySavedData.innerHTML = "";
+});
