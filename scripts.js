@@ -21,7 +21,7 @@ widthOfScreen.addEventListener("change", function () {
 
 //The actual functions for functionality
 function fetchData(city, country) {
-  fetch("mySecret.txt")
+  fetch("keygen.txt")
     .then((res) => res.json())
     .then((textJSON) => {
       fetch(
