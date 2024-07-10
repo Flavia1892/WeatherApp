@@ -233,8 +233,9 @@ getValueByEnter();
 loadDataButton.addEventListener("click", loadWeatherdata); //here we fire up the load local storage data
 //here we clear the local storage data
 clearSavedDataButton.addEventListener("click", () => {
-  localStorage.setItem("weatherDataFromUser", "");
+  localStorage.clear();
   displaySavedData.innerHTML = "";
+  alert("Your data has been cleared!");
 });
 
 document.querySelector(".btn-outline-dark").style.display = "none";
