@@ -148,6 +148,7 @@
 
         color: bisque;
       }
+
       .dark-theme-buttons {
         background-color: rgb(52, 54, 61);
         color: bisque;
@@ -168,6 +169,17 @@
       }
       .modal-content-dark {
         background-color: #888;
+      }
+
+      .dark-mode {
+        width: 50px;
+        height: 50px;
+        background-image: url(/styles/moon.png);
+        background-size: cover;
+        background-position: center;
+        border-radius: 50px;
+        padding: 10px 20px;
+        border: none;
       }
     </style>
 
@@ -195,8 +207,7 @@
         <input type="text" class="form-control" placeholder="City,country" />
       </form>
       <div class="slider-container">
-        <label for="dark-slider">Toggle dark mode</label>
-        <input type="range" id="dark-slider" min="0" max="100" value="50" />
+        <button type="button" id="dark-button" class="dark-mode"></button>
       </div>
 
       <p id="loading"></p>

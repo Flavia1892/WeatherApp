@@ -1,12 +1,20 @@
 let clearSavedDataButton = document.getElementById("saveData");
 let loadDataButton = document.getElementById("loadData");
 let displaySavedData = document.getElementById("displaySavedData");
+let daysOfWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 function responseScreen(x) {
   if (x.matches) {
     document.querySelector(".titlePage").style = "font-size:25px";
     document.querySelector(".btn-outline-dark").style.display = "none";
-    document.querySelector(".reset").style.display = "block";
     displaySavedData.style.fontSize = "10px";
   } else {
     document.querySelector(".titlePage").style = "font-size:60px";
@@ -91,7 +99,11 @@ function fetchData(city, country) {
                           <h6 class="flex-grow-1" id='cityCountry'>${city} ${
                 responseJSON.city.country
               }</h6>
-                          <h6 class="flex-grow-1">Day ${i} </h6>
+                          <h6 class="flex-grow-1"> ${
+                            daysOfWeek[
+                              getDayConverter(responseJSON.list[counter].dt)
+                            ]
+                          } </h6>
                           <h6 id='time'>${getTimeConverter(
                             responseJSON.list[counter].dt
                           )} </h6>
@@ -154,6 +166,12 @@ function fetchData(city, country) {
 function getTimeConverter(epochDate) {
   let date = new Date(epochDate * 1000);
   return date.toLocaleString();
+}
+
+function getDayConverter(epochDate) {
+  let date = new Date(epochDate * 1000);
+  let dayOfWeek = date.getDay();
+  return dayOfWeek;
 }
 
 function getValueByEnter() {
@@ -219,38 +237,24 @@ function showPosition(position) {
 }
 //the function to toggle dark mode
 function getDarkMode() {
-  let slider = document.getElementById("dark-slider");
+  let toggleDark = document.getElementById("dark-button");
   let body = document.querySelector("body");
 
-  slider.addEventListener("input", function () {
-    let value = slider.value;
-
-    if (value >= 50) {
-      body.classList.add("dark-theme");
-      document.getElementById("loadData").classList.add("dark-theme-buttons");
-      document.getElementById("saveData").classList.add("dark-theme-buttons");
-      document
-        .getElementById("getLocation")
-        .classList.add("dark-theme-buttons");
-      document.querySelector(".titlePage").classList.add("titlePage-dark");
-      document
-        .querySelector(".modal-content")
-        .classList.add("modal-content-dark");
+  toggleDark.addEventListener("click", function () {
+    body.classList.toggle("dark-theme");
+    document.getElementById("loadData").classList.toggle("dark-theme-buttons");
+    document.getElementById("saveData").classList.toggle("dark-theme-buttons");
+    document
+      .getElementById("getLocation")
+      .classList.toggle("dark-theme-buttons");
+    document.querySelector(".titlePage").classList.toggle("titlePage-dark");
+    document
+      .querySelector(".modal-content")
+      .classList.toggle("modal-content-dark");
+    if (body.classList.contains("dark-theme")) {
+      toggleDark.style.backgroundImage = "url('/styles/sun.png ')";
     } else {
-      body.classList.remove("dark-theme");
-      document
-        .getElementById("loadData")
-        .classList.remove("dark-theme-buttons");
-      document
-        .getElementById("saveData")
-        .classList.remove("dark-theme-buttons");
-      document
-        .getElementById("getLocation")
-        .classList.remove("dark-theme-buttons");
-      document.querySelector(".titlePage").classList.remove("titlePage-dark");
-      document
-        .querySelector(".modal-content")
-        .classList.remove("modal-content-dark");
+      toggleDark.style.backgroundImage = "url('/styles/moon.png ')";
     }
   });
 }
