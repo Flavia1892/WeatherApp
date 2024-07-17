@@ -190,8 +190,74 @@ function loadWeatherdata() {
   } else alert("No data stored to be found!");
 }
 
+//the functions to get the current GPS locations for cards
+function getCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else alert("Geolocation is not supported by this browser!");
+}
+function showPosition(position) {
+  fetch("keygen.txt")
+    .then((res) => res.json())
+    .then((textJSON) => {
+      let currLatitude = position.coords.latitude;
+      let currLongitutde = position.coords.longitude;
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${currLatitude}&lon=${currLongitutde}&appid=${textJSON.API_KEY}`
+      )
+        .then((response) => response.json()) // get Response, and make it a JSON object
+        .then((responseJSON) => {
+          console.log(responseJSON);
+
+          let currentCity = responseJSON.name;
+          document.querySelector(".form-control").value = currentCity;
+
+          fetchData(currentCity);
+        });
+    });
+}
+//the function to toggle dark mode
+function getDarkMode() {
+  let slider = document.getElementById("dark-slider");
+  let body = document.querySelector("body");
+
+  slider.addEventListener("input", function () {
+    let value = slider.value;
+
+    if (value >= 50) {
+      body.classList.add("dark-theme");
+      document.getElementById("loadData").classList.add("dark-theme-buttons");
+      document.getElementById("saveData").classList.add("dark-theme-buttons");
+      document
+        .getElementById("getLocation")
+        .classList.add("dark-theme-buttons");
+      document.querySelector(".titlePage").classList.add("titlePage-dark");
+      document
+        .querySelector(".modal-content")
+        .classList.add("modal-content-dark");
+    } else {
+      body.classList.remove("dark-theme");
+      document
+        .getElementById("loadData")
+        .classList.remove("dark-theme-buttons");
+      document
+        .getElementById("saveData")
+        .classList.remove("dark-theme-buttons");
+      document
+        .getElementById("getLocation")
+        .classList.remove("dark-theme-buttons");
+      document.querySelector(".titlePage").classList.remove("titlePage-dark");
+      document
+        .querySelector(".modal-content")
+        .classList.remove("modal-content-dark");
+    }
+  });
+}
+
 //Stuff that runs automatically upon loading the page
 document.querySelector(".reset").addEventListener("click", () => {
+  document.querySelector(".form-control").value = "";
   document.querySelector(".containerNextDays").innerHTML = "";
   document.querySelector(".reset").style.display = "none";
   document.querySelector(".cityToday").innerHTML = "City";
@@ -239,3 +305,8 @@ clearSavedDataButton.addEventListener("click", () => {
 });
 
 document.querySelector(".btn-outline-dark").style.display = "none";
+document
+  .getElementById("current-location-button")
+  .addEventListener("click", getCurrentLocation);
+
+getDarkMode();

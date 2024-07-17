@@ -16,9 +16,9 @@
     <style>
       body {
         overflow-x: hidden;
+        background-color: rgb(228, 240, 241);
       }
       .bodyOfCards {
-        background-color: rgb(228, 240, 241);
       }
       .titlePage {
         display: flex;
@@ -61,10 +61,8 @@
         }
       }
       .containerNextDays {
-        background-color: rgb(228, 240, 241);
       }
       #loading {
-        background-color: rgb(228, 240, 241);
         padding-top: 200px;
         padding-bottom: 200px;
         display: flex;
@@ -76,7 +74,6 @@
         text-align: center;
       }
       form {
-        background-color: rgb(228, 240, 241);
         padding-top: 20px;
         display: flex;
         justify-content: center;
@@ -93,7 +90,7 @@
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
         z-index: 1; /* Sit on top */
-        left: 1350px;
+        left: 1150px;
         top: 30px;
         width: 25%; /* Full width */
         height: 30%; /* Full height */
@@ -132,6 +129,46 @@
           font-size: 40px;
         }
       }
+      #current-location-button {
+        display: flex;
+        justify-content: center;
+      }
+      #getLocation:hover {
+        background-color: black;
+        color: white;
+      }
+
+      .dark-theme {
+        background-image: linear-gradient(
+          to right,
+          rgb(41, 41, 93),
+          rgb(62, 62, 132),
+          rgb(97, 97, 192)
+        );
+
+        color: bisque;
+      }
+      .dark-theme-buttons {
+        background-color: rgb(52, 54, 61);
+        color: bisque;
+      }
+
+      .slider-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 40px;
+      }
+      .titlePage-dark {
+        background-image: linear-gradient(
+          rgb(8, 8, 93),
+          rgb(27, 27, 151),
+          rgb(64, 64, 211)
+        );
+      }
+      .modal-content-dark {
+        background-color: #888;
+      }
     </style>
 
     <body>
@@ -157,7 +194,13 @@
       <form>
         <input type="text" class="form-control" placeholder="City,country" />
       </form>
+      <div class="slider-container">
+        <label for="dark-slider">Toggle dark mode</label>
+        <input type="range" id="dark-slider" min="0" max="100" value="50" />
+      </div>
+
       <p id="loading"></p>
+
       <!--Body of Index page with weather cards-->
       <!--Today card-->
       <div class="pageContent">
@@ -225,6 +268,9 @@
               padding-bottom: 30px;
             "
           ></div>
+          <div id="current-location-button">
+            <button type="button" id="getLocation">Get current location</button>
+          </div>
 
           <button type="button" class="btn btn-outline-dark">
             Below the weather forecast for the next 5 days
@@ -232,13 +278,7 @@
         </div>
         <!--rest of cards-->
         <div class="containerNextDays"></div>
-        <div
-          style="
-            background-color: rgb(228, 240, 241);
-            padding-top: 50px;
-            padding-bottom: 60px;
-          "
-        >
+        <div style="padding-top: 50px; padding-bottom: 60px">
           <div style="display: flex; flex-wrap: wrap; justify-content: center">
             <button type="button" class="reset">Reset</button>
           </div>
