@@ -42,7 +42,6 @@ function fetchData(city, country) {
           //Here we set the details of the today card according to the user input
           document.querySelector(".cityToday").innerHTML =
             city + " " + responseJSON.sys.country;
-          //let todayWeather = responseJSON.list[0];
           document.getElementById("todayTime").innerHTML = `${getTimeConverter(
             responseJSON.dt
           )}`;
