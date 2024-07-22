@@ -199,8 +199,14 @@ function loadWeatherdata() {
   let savedDataFromUser = localStorage.getItem("weatherDataFromUser");
   if (savedDataFromUser) {
     {
-      displaySavedData.innerHTML = `<h3>Your last city searched is: <li>${savedDataFromUser} <button type='button' id='close'>X</button></li></h3>`;
+      displaySavedData.innerHTML = `<ul><h3>Your last city searched is: <li id='savedData'>${savedDataFromUser}</li></h3><li id='closeButton'> <button type='button' id='close'>Close</button></li></ul>`;
+
       document.getElementById("close").addEventListener("click", () => {
+        displaySavedData.innerHTML = "";
+      });
+      document.getElementById("savedData").addEventListener("click", () => {
+        fetchData(`${savedDataFromUser}`);
+        document.querySelector(".form-control").value = `${savedDataFromUser}`;
         displaySavedData.innerHTML = "";
       });
     }
@@ -286,7 +292,7 @@ setTimeout(() => {
   //Modal display
   let modal = document.getElementById("myModal");
 
-  let btn = document.querySelector("form");
+  let btn = document.querySelector(".form-control");
 
   btn.addEventListener("mouseover", function () {
     modal.style.display = "block";

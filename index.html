@@ -181,6 +181,25 @@
         padding: 10px 20px;
         border: none;
       }
+      #closeButton {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+      }
+      #close {
+        background-color: rgb(120, 8, 8);
+        color: wheat;
+        height: 25px;
+        width: 53px;
+        padding-bottom: 5px;
+        font-size: 12px;
+      }
+      #savedData{
+        cursor: pointer;
+      }
+      #savedData:hover{
+        text-decoration: underline;
+      }
     </style>
 
     <body>
@@ -264,9 +283,9 @@
               padding-bottom: 30px;
             "
           >
-            <button type="button" id="saveData">Remove saved Data</button>
+            <button type="button" id="saveData">Remove last saved City</button>
             <button type="button" id="loadData" style="height: 30px">
-              Load Data
+              Load last city
             </button>
           </div>
           <div
