@@ -10,7 +10,8 @@ let daysOfWeek = [
   "Friday",
   "Saturday",
 ];
-const myApiKey = process.env.REACT_APP_API_KEY;
+
+
 
 function responseScreen(x) {
   if (x.matches) {
@@ -23,6 +24,7 @@ function responseScreen(x) {
   }
 }
 let widthOfScreen = window.matchMedia("(max-width:550px");
+
 responseScreen(widthOfScreen);
 widthOfScreen.addEventListener("change", function () {
   responseScreen(widthOfScreen);
@@ -30,16 +32,17 @@ widthOfScreen.addEventListener("change", function () {
 
 //The actual functions for functionality
 function fetchData(city, country) {
- // fetch("keygen.txt")
-  //  .then((res) => res.json())
-  //  .then((textJSON) => {
+  fetch("keygen.txt")
+    .then((res) => res.json())
+    .then((textJSON) => {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&appid=` +
-          myApiKey
+          textJSON.API_KEY
       )
         .then((response) => response.json()) // get Response, and make it a JSON object
         .then((responseJSON) => {
           console.log(responseJSON);
+         
           //Here we set the details of the today card according to the user input
           document.querySelector(".cityToday").innerHTML =
             city + " " + responseJSON.sys.country;
@@ -73,7 +76,7 @@ function fetchData(city, country) {
       //here we use the same API-KEY stored in textJSON to fetch data from forecast API
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&appid=` +
-         myApiKey
+        textJSON.API_KEY
       )
         .then((response) => response.json()) // get Response, and make it a JSON object
         .then((responseJSON) => {
@@ -159,7 +162,7 @@ function fetchData(city, country) {
               counter += 8;
             }
           }, 2000);
-      //  });
+        });
     });
 }
 
@@ -228,7 +231,7 @@ function showPosition(position) {
       let currLongitutde = position.coords.longitude;
 
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${currLatitude}&lon=${currLongitutde}&appid=${myApiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${currLatitude}&lon=${currLongitutde}&appid=${ textJSON.API_KEY}`
       )
         .then((response) => response.json()) // get Response, and make it a JSON object
         .then((responseJSON) => {
