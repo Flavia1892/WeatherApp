@@ -10,6 +10,7 @@ let daysOfWeek = [
   "Friday",
   "Saturday",
 ];
+const myApiKey = process.env.REACT_APP_API_KEY;
 
 function responseScreen(x) {
   if (x.matches) {
@@ -34,7 +35,7 @@ function fetchData(city, country) {
     .then((textJSON) => {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&appid=` +
-          textJSON.API_KEY
+          myApiKey
       )
         .then((response) => response.json()) // get Response, and make it a JSON object
         .then((responseJSON) => {
@@ -72,7 +73,7 @@ function fetchData(city, country) {
       //here we use the same API-KEY stored in textJSON to fetch data from forecast API
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&appid=` +
-          textJSON.API_KEY
+         myApiKey
       )
         .then((response) => response.json()) // get Response, and make it a JSON object
         .then((responseJSON) => {
@@ -227,7 +228,7 @@ function showPosition(position) {
       let currLongitutde = position.coords.longitude;
 
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${currLatitude}&lon=${currLongitutde}&appid=${textJSON.API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${currLatitude}&lon=${currLongitutde}&appid=${myApiKey}`
       )
         .then((response) => response.json()) // get Response, and make it a JSON object
         .then((responseJSON) => {
