@@ -30,9 +30,9 @@ widthOfScreen.addEventListener("change", function () {
 
 //The actual functions for functionality
 function fetchData(city, country) {
-  fetch("keygen.txt")
-    .then((res) => res.json())
-    .then((textJSON) => {
+ // fetch("keygen.txt")
+  //  .then((res) => res.json())
+  //  .then((textJSON) => {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&appid=` +
           myApiKey
@@ -159,7 +159,7 @@ function fetchData(city, country) {
               counter += 8;
             }
           }, 2000);
-        });
+      //  });
     });
 }
 
